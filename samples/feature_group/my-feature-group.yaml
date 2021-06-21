@@ -1,0 +1,24 @@
+apiVersion: sagemaker.services.k8s.aws/v1alpha1
+kind: FeatureGroup
+metadata:
+  name: ack-sample-feature-group-<your user name>
+  spec:
+    eventTimeFeatureName: EventTime
+    featureDefinitions:
+      - featureName: TransactionID
+	featureType: Integral
+      - featureName: EventTime
+        featureType: Fractional
+    featureGroupName: <your user name>ACKTestingFeatureGroup
+    recordIdentifierFeatureName: TransactionID
+    offlineStoreConfig:
+      s3StorageConfig:
+        s3URI: s3://<your s3 bucket>/feature-group-data
+    onlineStoreConfig:
+enableOnlineStore: True
+    roleARN: arn:aws:iam::<Insert sagemaker execution role with
+                           AmazonS3FullAccess,
+                           AmazonSageMakerFullAccess,
+                           a sagemaker execution policy,
+                           AmazonSageMakerFeatureStoreAccess,
+                           and access to the s3 bucket>
