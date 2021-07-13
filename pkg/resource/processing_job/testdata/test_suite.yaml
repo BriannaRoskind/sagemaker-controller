@@ -1,0 +1,17 @@
+tests:
+  - name: "Processing job demo test"
+    description: "Processing job CRD tests"
+    scenarios:
+     - name: "Create=InvalidInput"
+       description: "Given one of the parameters is invalid, ko.Status shows a terminal condition"
+       given:
+         desired_state: "processing_job/cr/pj_cmd_invalid_before_create.yaml"
+         svc_api:
+           - operation: CreateProcessingJobWithContext
+             error:
+               code: InvalidParameterValue
+               message: "The processing job name must start with an alphanumeric character."
+       invoke: Create
+       expect:
+         latest_state: "processing_job/cr/pj_cmd_invalid_create_attempted.yaml"
+         error: resource is in terminal condition
