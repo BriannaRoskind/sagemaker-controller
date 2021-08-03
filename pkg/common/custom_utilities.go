@@ -66,7 +66,8 @@ func IsYamlEqual(expectation *string, actualYamlByteArray *[]byte) bool {
 
 	if len(output) > 0 {
 	   actualOutput,_ := exec.Command("cat", actualYamlFileName).Output()
-	   fmt.Printf("\nActual Yaml File Instead of: " + expectedYamlFileName + "\n" + string(actualOutput) + "\n")
+	   fmt.Printf("\nExpected Yaml File Name: " + expectedYamlFileName + "\n")
+	   fmt.Printf("\nActual Output Yaml:\n" + string(actualOutput) + "\n")
 	   fmt.Printf("Diff From Expected:\n" + string(output) + "\n")
 	   return false
 	}
