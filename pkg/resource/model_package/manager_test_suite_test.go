@@ -57,7 +57,7 @@ func provideResourceManagerWithMockSDKAPI(mockSageMakerAPI *mocksvcsdkapi.SageMa
 }
 
 // TestModelPackageTestSuite runs the test suite for model package
-func TestModelPakcageTestSuite(t *testing.T) {
+func TestModelPackageTestSuite(t *testing.T) {
 	var ts = testutil.TestSuite{}
 	testutil.LoadFromFixture(filepath.Join("testdata", "test_suite.yaml"), &ts)
 	var delegate = testRunnerDelegate{t: t}

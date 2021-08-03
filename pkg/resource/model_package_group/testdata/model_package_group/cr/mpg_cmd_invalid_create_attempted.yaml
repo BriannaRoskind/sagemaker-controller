@@ -1,17 +1,10 @@
 apiVersion: sagemaker.services.k8s.aws/v1alpha1
-kind: ModelPackage
+kind: ModelPackageGroup
 metadata:
   creationTimestamp: null
   name: unit-testing-model-package-group
 spec:
   modelPackageGroupName: null
-  tags:
-  - key: algorithm
-    value: xgboost
-  - key: environment
-    value: testing
-  - key: customer
-    value: test-user
 status:
   ackResourceMetadata:
     ownerAccountID: ""

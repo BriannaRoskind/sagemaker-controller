@@ -3,7 +3,7 @@ kind: ModelPackage
 metadata:
   name: unit-testing-model-package
 spec:
-  modelPackageGroupName: !-intentionally-invalid-name
+  modelPackageName: !-intentionally-invalid-name
   modelPackageDescription: "Description for model package"
   inferenceSpecification:
     containers:
@@ -33,4 +33,10 @@ spec:
           transformResources:
             instanceCount: 1
             instanceType: ml.m5.large
-  modelApprovalStatus: "PendingManualApproval"
+  tags:
+    - key: algorithm
+      value: xgboost
+    - key: environment
+      value: testing
+    - key: customer
+      value: test-user
