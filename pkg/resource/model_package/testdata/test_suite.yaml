@@ -1,6 +1,6 @@
 tests:
-  - name: "Versioned model package demo test"
-    description: "Versioned model package CRD tests"
+  - name: "Unversioned model package demo test"
+    description: "Unversioned model package CRD tests"
     scenarios:
      - name: "Create=InvalidInput"
        description: "Given one of the parameters is invalid, ko.Status shows a terminal condition"
