@@ -145,6 +145,7 @@ func (runner *TestSuiteRunner) assertExpectations(assert *assert.Assertions, exp
 			fmt.Println("Unexpected differences:")
 			for _, difference := range delta.Differences {
 				fmt.Printf("Path: %v, expected: %v, actual: %v\n", difference.Path, difference.A, difference.B)
+				fmt.Printf("See expected differences below:\n")
 			}
 		}
 
