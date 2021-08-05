@@ -32,10 +32,6 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-var	DefaultTimestamp = "0001-01-01T00:00:00Z"
-var	ReplaceTimestampRegExp = "s/\"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z\"/\"" + DefaultTimestamp + "\"/"
-var	TestDataDirectory = "testdata"
-
 // provideResourceManagerWithMockSDKAPI accepts MockSageMakerAPI and returns pointer to resourceManager
 // the returned resourceManager is configured to use mockapi api.
 func provideResourceManagerWithMockSDKAPI(mockSageMakerAPI *mocksvcsdkapi.SageMakerAPI) *resourceManager {
