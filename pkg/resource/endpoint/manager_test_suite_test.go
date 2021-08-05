@@ -20,7 +20,6 @@ import (
 	mocksvcsdkapi "github.com/aws-controllers-k8s/sagemaker-controller/mocks/aws-sdk-go/sagemaker"
 	ackv1alpha1 "github.com/aws-controllers-k8s/runtime/apis/core/v1alpha1"
 	"github.com/ghodss/yaml"
-	svccommon "github.com/aws-controllers-k8s/sagemaker-controller/pkg/common"
 	"github.com/aws-controllers-k8s/sagemaker-controller/pkg/testutil"
 	acktypes "github.com/aws-controllers-k8s/runtime/pkg/types"
 	svcsdk "github.com/aws/aws-sdk-go/service/sagemaker"
@@ -127,5 +126,5 @@ func (d *testRunnerDelegate) YamlEqual(expectation string, actual acktypes.AWSRe
 	// Build a tmp file for the actual yaml.
 	actualResource := actual.(*resource)
 	actualYamlByteArray, _ := yaml.Marshal(actualResource.ko)
-	return svccommon.IsYamlEqual(&expectation, &actualYamlByteArray)
+	return testutil.IsYamlEqual(&expectation, &actualYamlByteArray)
 }

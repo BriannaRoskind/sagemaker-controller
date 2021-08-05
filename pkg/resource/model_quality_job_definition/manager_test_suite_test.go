@@ -22,7 +22,6 @@ import (
 	"github.com/ghodss/yaml"
 	"github.com/aws-controllers-k8s/sagemaker-controller/pkg/testutil"
 	acktypes "github.com/aws-controllers-k8s/runtime/pkg/types"
-	svccommon "github.com/aws-controllers-k8s/sagemaker-controller/pkg/common"
 	svcsdk "github.com/aws/aws-sdk-go/service/sagemaker"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
@@ -122,5 +121,5 @@ func (d *testRunnerDelegate) YamlEqual(expectation string, actual acktypes.AWSRe
 	// Build a tmp file for the actual yaml.
 	actualResource := actual.(*resource)
 	actualYamlByteArray, _ := yaml.Marshal(actualResource.ko)
-	return svccommon.IsYamlEqual(&expectation, &actualYamlByteArray)
+	return testutil.IsYamlEqual(&expectation, &actualYamlByteArray)
 }
