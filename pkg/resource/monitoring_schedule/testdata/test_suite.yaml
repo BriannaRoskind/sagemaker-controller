@@ -5,7 +5,7 @@ tests:
      - name: "Create=InvalidInput"
        description: "Given one of the parameters is invalid, ko.Status shows a terminal condition"
        given:
-         desired_state: "monitoring_schedule/cr/ms_cmd_invalid_before_create.yaml"
+         desired_state: "monitoring_schedule/cr/ms_invalid_before_create.yaml"
          svc_api:
            - operation: CreateMonitoringScheduleWithContext
              error:
@@ -13,5 +13,5 @@ tests:
                message: "The monitoring schedule name must start with an alphanumeric character."
        invoke: Create
        expect:
-         latest_state: "monitoring_schedule/cr/ms_cmd_invalid_create_attempted.yaml"
+         latest_state: "monitoring_schedule/cr/ms_invalid_create_attempted.yaml"
          error: resource is in terminal condition
