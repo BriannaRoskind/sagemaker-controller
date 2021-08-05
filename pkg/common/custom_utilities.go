@@ -20,9 +20,11 @@ import (
 	"os/exec"
 )
 
-var	TestDataDirectory = "testdata"
-var	DefaultTimestamp = "0001-01-01T00:00:00Z"
-var	ReplaceTimestampRegExp = "s/\"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z\"/\"" + DefaultTimestamp + "\"/"
+var (
+	TestDataDirectory = "testdata"
+	DefaultTimestamp = "0001-01-01T00:00:00Z"
+	ReplaceTimestampRegExp = "s/\"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z\"/\"" + DefaultTimestamp + "\"/"
+)
 
 // IsModifyingStatus returns true if a
 // resource's latest status matches one
@@ -55,17 +57,20 @@ func IsYamlEqual(expectation *string, actualYamlByteArray *[]byte) bool {
 
 	// Replace Timestamps that would show up as different.
 	_, err := exec.Command("sed", "-r", "-i", ReplaceTimestampRegExp, actualYamlFileName).Output()
-	if !checkExecCommandError(err) {
+	if isExecCommandError(err) {
 	    return false
 	}
 	
 	output,err := exec.Command("diff", "-c", expectedYamlFileName, actualYamlFileName).Output()
-	if !checkExecCommandError(err) {
+	if isExecCommandError(err) {
 	   return false
 	}
 
 	if len(output) > 0 {
-	   actualOutput,_ := exec.Command("cat", actualYamlFileName).Output()
+	   actualOutput,err := exec.Command("cat", actualYamlFileName).Output()
+	   if isExecCommandError(err) {
+	      return false
+	   }
 	   fmt.Printf("\nExpected Yaml File Name: " + expectedYamlFileName + "\n")
 	   fmt.Printf("\nActual Output Yaml:\n" + string(actualOutput) + "\n")
 	   fmt.Printf("Diff From Expected:\n" + string(output) + "\n")
@@ -91,18 +96,20 @@ func buildTmpFile(fileNameBase string, contents []byte) string {
      return newTmpFile.Name()
 }
 
-func checkExecCommandError(err error) bool {
+// isExecCommandError returns true if an error
+// that is not an ExitError is found.
+func isExecCommandError(err error) bool {
      if err == nil {
-     	return true
+     	return false
      }
      switch err.(type) {
 	case *exec.ExitError:
 	       // ExitError is expected.
-	       return true
+	       return false
 	default:
 	       // Couldn't run diff.
 	       fmt.Printf("Exec Command Error: ")
 	       fmt.Println(err)
-	       return false
+	       return true
      }
 }
