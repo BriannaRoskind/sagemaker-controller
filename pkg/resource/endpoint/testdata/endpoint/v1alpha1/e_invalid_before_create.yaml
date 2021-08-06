@@ -1,7 +1,7 @@
 apiVersion: sagemaker.services.k8s.aws/v1alpha1
 kind: Endpoint
 metadata:
-kk  name: unit_testing_endpoint
+  name: unit_testing_endpoint
 spec:
   endpointName: !-intentionally-invalid-name
   endpointConfigName: unit_testing_endpoint
