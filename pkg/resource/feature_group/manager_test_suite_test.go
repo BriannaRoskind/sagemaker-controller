@@ -17,7 +17,7 @@ import (
 	"errors"
 	"fmt"
 
-	mocksvcsdkapi "github.com/aws-controllers-k8s/sagemaker-controller/mocks/aws-sdk-go/sagemaker"
+	mocksvcsdkapi "github.com/aws-controllers-k8s/sagemaker-controller/test/mocks/aws-sdk-go/sagemaker"
 	ackv1alpha1 "github.com/aws-controllers-k8s/runtime/apis/core/v1alpha1"
 	"github.com/ghodss/yaml"
 	"github.com/aws-controllers-k8s/sagemaker-controller/pkg/testutil"
