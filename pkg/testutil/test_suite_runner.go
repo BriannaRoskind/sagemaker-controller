@@ -87,6 +87,7 @@ func (runner *TestSuiteRunner) startScenario (scenario TestScenario) {
        }()
        fmt.Printf("Running test scenario: %s\n", scenario.Name)
        fixtureCxt := runner.setupFixtureContext(&scenario.Fixture)
+       runner.Delegate.YamlEqual(scenario.Fixture.DesiredState, fixtureCxt.desired)
        runner.runTestScenario(t, scenario.Name, fixtureCxt, scenario.UnitUnderTest, &scenario.Expect)
      })
 }
